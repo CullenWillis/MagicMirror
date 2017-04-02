@@ -1,4 +1,4 @@
-package GUISettings.Settings;
+package Settings;
 
 import java.awt.*;
 import java.io.*;
@@ -8,7 +8,7 @@ import java.util.Properties;
 
 import javax.swing.*;
 
-public class Settings{
+public class Settings implements Settings_Interface{
 	
 	Properties settings;
 	
@@ -45,17 +45,15 @@ public class Settings{
 		}
 	}
 	
-	public void SetFrameSettings(JFrame window)
+	public void SetSettings(JFrame window)
 	{
 		if(settings != null)
 		{
 			int windowWidth = Integer.parseInt(settings.getProperty("windowWidth", "1920"));
 			int windowHeight = Integer.parseInt(settings.getProperty("windowHeight", "1080"));
-			boolean windowVisilbity = Boolean.parseBoolean(settings.getProperty("windowVisibility", "true"));
 			boolean windowResizable = Boolean.parseBoolean(settings.getProperty("windowResizable", "false"));
 			boolean windowUndecorated = Boolean.parseBoolean(settings.getProperty("windowUndecorated", "true"));
 			boolean windowExtendedState = Boolean.parseBoolean(settings.getProperty("windowExtendedState", "true"));
-			
 			Dimension size = new Dimension(windowWidth, windowHeight);
 			
 			if(testingMode)
@@ -78,8 +76,9 @@ public class Settings{
 			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // exit on close (DISPOSE_ON_CLOSE, dispose frame)
 			window.setTitle("Magic Mirror"); // title
 			window.setResizable(windowResizable);
+			window.getContentPane().setBackground(Color.BLACK);
 			
-			window.setVisible(windowVisilbity);
+			window.setVisible(true);
 		}
 		else
 		{
