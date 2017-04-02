@@ -34,6 +34,8 @@ public class Settings implements Settings_Interface{
 		
 		URL u = getClass().getProtectionDomain().getCodeSource().getLocation();
 		
+		System.out.println("Searching for properties file...");
+		
 	    try 
 	    {
 			File f = new File(u.toURI());
@@ -43,18 +45,18 @@ public class Settings implements Settings_Interface{
 		} 
 	    catch (URISyntaxException e1) 
 	    {
-	    	System.out.println(e1);
+	    	System.out.println("ERROR | " + e1);
 		}
 
 		
 		try 
 		{
 			settings.load(new FileInputStream(directory));
-			System.out.println("properties file found.");
+			System.out.println("properties file found! Time lapse: " + System.currentTimeMillis() % 1000 + "ms");
 		}
 		catch (IOException e)
 		{
-			System.out.println("Couldn't find file: settings.properties.");
+			System.out.println("ERROR | Couldn't find file: settings.properties");
 		}
 	}
 	
@@ -96,11 +98,11 @@ public class Settings implements Settings_Interface{
 			window.setResizable(windowResizable);
 			window.getContentPane().setBackground(Color.BLACK);
 			
-			window.setVisible(true);
+			System.out.println("- Application properties set");
 		}
 		else
 		{
-			System.out.println("Couldn't find file: settings.properties.");
+			System.out.println("ERROR | Couldn't find file: settings.properties");
 		}
 	}
 
@@ -116,6 +118,8 @@ public class Settings implements Settings_Interface{
 		// Window settings (Will place panel in the center and allow it to grow until its the same size as the window.
 		panel.setLayout(layout);
 		window.add(panel);
+		
+		System.out.println("- HomeScreen properties set");
 	}
 	
 	public Dimension GetResolution() { return preferredResolution; }

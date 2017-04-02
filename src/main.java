@@ -1,4 +1,4 @@
-package MagicMirror;
+
 
 import HomeScreen.HomeScreenGUI;
 
@@ -9,5 +9,6 @@ public class main
 	public static void main(String[] args) 
 	{
 		homeScreen = new HomeScreenGUI();
+		homeScreen.Prepare();
 	}
 }

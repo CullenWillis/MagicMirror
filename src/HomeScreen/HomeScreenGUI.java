@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import HomeScreen.Properties.HomeScreenProperties;
+import HomeScreen.Properties.HomeScreenProperties_Interface;
 import Settings.Settings;
 import Settings.Settings_Interface;
 
@@ -15,6 +17,7 @@ public class HomeScreenGUI
 {
 	// Global variables
 	private Settings_Interface settings; // Interface for Settings class
+	private HomeScreenProperties_Interface properties;
 	
 	private int windowWidth; // width of the application's window;
 	
@@ -31,38 +34,41 @@ public class HomeScreenGUI
 		containerPanel = new JPanel();
 		
 		settings = new Settings();
+		properties = new HomeScreenProperties();
 	}
 	
-	public void SetProperties()
+	public void Start()
 	{
+		applicationWindow.setVisible(true);
+	}
+	
+	public void Prepare()
+	{	
+		System.out.println("\nPreparing HomeScreen...");
+		
 		// Set settings from the properties file
 		settings.SetWindowSettings(applicationWindow);
 		settings.SetHomeScreenLayout(applicationWindow, containerPanel);
 		windowWidth = applicationWindow.getWidth();
-		System.out.println(windowWidth);
 		
 		// Set the Header and Footer Settings
-		SetHeaderProperties();
-		SetFooterProperties();
+		CreateContainers();
 		
 		// Add header & footer to container
 		containerPanel.add(headerPanel, BorderLayout.NORTH);
 		containerPanel.add(footerPanel, BorderLayout.SOUTH);
+		
+		System.out.println("Preperations completed! Time lapse: " + System.currentTimeMillis() % 1000 + "ms");
 	}
 	
-	private void SetHeaderProperties()
+	private void CreateContainers()
 	{
 		headerPanel = new JPanel();
-		
-		headerPanel.setPreferredSize(new Dimension(windowWidth, 200));
-		headerPanel.setBackground(Color.BLUE);
-	}
-	
-	private void SetFooterProperties()
-	{
 		footerPanel = new JPanel();
 		
-		footerPanel.setPreferredSize(new Dimension(windowWidth, 150));
-		footerPanel.setBackground(Color.RED);
+		properties.SetHeaderProperties(headerPanel, windowWidth);
+		properties.SetFooterProperties(footerPanel, windowWidth);
+		
+		System.out.println("- Header and Footer created");
 	}
 }
