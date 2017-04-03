@@ -9,6 +9,8 @@ public class main
 	public static void main(String[] args) 
 	{
 		homeScreen = new HomeScreenGUI();
+		
 		homeScreen.Prepare();
+		homeScreen.Start();
 	}
 }
