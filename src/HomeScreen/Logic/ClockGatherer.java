@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.swing.JLabel;
 
-public class DigitalClock implements Runnable, Logic_Interface 
+public class ClockGatherer implements Runnable, DateTime_Interface 
 {
 	Thread t1 = null;
 	int hours = 0, minutes = 0, seconds = 0;
@@ -14,7 +14,7 @@ public class DigitalClock implements Runnable, Logic_Interface
 	
 	JLabel digitalClock;
 	
-	public DigitalClock(){}
+	public ClockGatherer(){}
 	
 	public void Start(JLabel label)
 	{

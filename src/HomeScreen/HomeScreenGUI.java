@@ -11,8 +11,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import HomeScreen.Logic.DigitalClock;
-import HomeScreen.Logic.Logic_Interface;
+import HomeScreen.Logic.DateGatherer;
+import HomeScreen.Logic.ClockGatherer;
+import HomeScreen.Logic.DateTime_Interface;
+import HomeScreen.Logic.WeatherGatherer;
+import HomeScreen.Logic.Weather_Interface;
 import HomeScreen.Properties.HomeScreenProperties;
 import HomeScreen.Properties.HomeScreenProperties_Interface;
 import Settings.Settings;
@@ -23,7 +26,8 @@ public class HomeScreenGUI
 	// Global variables
 	private Settings_Interface settings; // Interface for Settings class
 	private HomeScreenProperties_Interface properties; // Interface for HomeScreen Properties
-	private Logic_Interface logic; // Interface for Logic Settings class
+	private DateTime_Interface dateTime; // Interface for Logic Settings class
+	private Weather_Interface weather; // Interface for Logic Settings class
 	
 	private int windowWidth; // width of the application's window;
 	
@@ -76,18 +80,42 @@ public class HomeScreenGUI
 		properties.SetFooterProperties(footerPanel, windowWidth);
 		
 		CreateDigitalClock();
+		CreateDate();
+		CreateWeather();
 		
 		System.out.println("- Header and Footer created");
 	}
 	
 	private void CreateDigitalClock()
 	{
-		logic = new DigitalClock();
+		dateTime = new ClockGatherer();
 		JLabel clock = new JLabel();
 		
 		properties.SetClockProperties(clock, windowWidth);
-		logic.Start(clock);
+		dateTime.Start(clock);
 		
 		headerPanel.add(clock);
+	}
+	
+	private void CreateDate()
+	{
+		dateTime = new DateGatherer();
+		JLabel dateLabel = new JLabel();
+		
+		properties.SetDateProperties(dateLabel, windowWidth);
+		dateTime.Start(dateLabel);
+		
+		headerPanel.add(dateLabel);
+	}
+	
+	private void CreateWeather()
+	{
+		weather = new WeatherGatherer();
+		JLabel weatherLabel = new JLabel();
+		
+		properties.SetWeatherProperties(weatherLabel, windowWidth);
+		weather.StartWeather(weatherLabel, "31927");
+		
+		headerPanel.add(weatherLabel);
 	}
 }
