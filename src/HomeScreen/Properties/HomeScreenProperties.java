@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.GraphicsEnvironment;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
@@ -25,11 +28,11 @@ public class HomeScreenProperties implements HomeScreenProperties_Interface{
 	public void SetClockProperties(JLabel clockLabel, int windowWidth)
 	{
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-	    ge.getAllFonts();
+		ge.getAllFonts();
 	    
 		clockLabel.setForeground(Color.WHITE);
 		clockLabel.setFont(new Font("Gadugi", Font.PLAIN, 100));
-		clockLabel.setBounds(50, 20, windowWidth, 100);
+		clockLabel.setBounds(40, 20, windowWidth, 100);
 	}
 	
 	public void SetDateProperties(JLabel dateLabel, int windowWidth)

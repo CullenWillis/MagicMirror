@@ -35,7 +35,7 @@ public class WeatherGatherer implements Runnable, Weather_Interface{
 			while (true) 
      		{
 				
-				weatherLabel.setText(display.getCondition());
+				weatherLabel.setText("");
 				
     	 		t1.sleep( 1000 ); 
      		}  

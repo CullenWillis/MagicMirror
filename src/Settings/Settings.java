@@ -64,6 +64,10 @@ public class Settings implements Settings_Interface{
 	{
 		if(settings != null)
 		{
+			// True antialiasing on!
+			System.setProperty("awt.useSystemAAFontSettings","on"); 
+			System.setProperty("swing.aatext", "true");
+			 
 			// Receive values from the properties file
 			int windowWidth = Integer.parseInt(settings.getProperty("windowWidth", String.valueOf((int)screenSize.getWidth())));
 			int windowHeight = Integer.parseInt(settings.getProperty("windowHeight", String.valueOf((int)screenSize.getHeight())));

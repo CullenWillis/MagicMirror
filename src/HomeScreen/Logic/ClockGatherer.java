@@ -31,14 +31,12 @@ public class ClockGatherer implements Runnable, DateTime_Interface
 	         while (true) 
 	         {
 	            Calendar cal = Calendar.getInstance();  
-	            hours = cal.get( Calendar.HOUR_OF_DAY );  
 	            
-	            if (hours > 12) hours -= 12;  
-	            
+	            hours = cal.get( Calendar.HOUR_OF_DAY ); 
 	            minutes = cal.get( Calendar.MINUTE );  
 	            seconds = cal.get( Calendar.SECOND );
 	            
-	            SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss");  
+	            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");  
 	            Date d = cal.getTime();  
 	            
 	            time = formatter.format( d );
