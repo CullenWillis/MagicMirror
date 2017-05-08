@@ -1,4 +1,4 @@
-package HomeScreen.Logic;
+package HomeScreen.Logic.Weather;
 
 import javax.swing.JLabel;
 

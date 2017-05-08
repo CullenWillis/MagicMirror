@@ -1,4 +1,4 @@
-package HomeScreen.Logic;
+package HomeScreen.Logic.DateTime;
 
 import javax.swing.JLabel;
 

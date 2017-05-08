@@ -5,17 +5,23 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import HomeScreen.Logic.DateGatherer;
-import HomeScreen.Logic.ClockGatherer;
-import HomeScreen.Logic.DateTime_Interface;
-import HomeScreen.Logic.WeatherGatherer;
-import HomeScreen.Logic.Weather_Interface;
+import HomeScreen.Logic.DateTime.ClockGatherer;
+import HomeScreen.Logic.DateTime.DateGatherer;
+import HomeScreen.Logic.DateTime.DateTime_Interface;
+import HomeScreen.Logic.Weather.WeatherGatherer;
+import HomeScreen.Logic.Weather.Weather_Interface;
 import HomeScreen.Properties.HomeScreenProperties;
 import HomeScreen.Properties.HomeScreenProperties_Interface;
 import Settings.Settings;
@@ -76,12 +82,16 @@ public class HomeScreenGUI
 		headerPanel = new JPanel();
 		footerPanel = new JPanel();
 		
-		properties.SetHeaderProperties(headerPanel, windowWidth);
-		properties.SetFooterProperties(footerPanel, windowWidth);
+		properties.SetHeaderProperties(headerPanel, windowWidth); // Intialise Header
+		properties.SetFooterProperties(footerPanel, windowWidth); // Intialise Footer
 		
+		// Header Display
 		CreateDigitalClock();
 		CreateDate();
 		CreateWeather();
+		
+		// Footer Display
+		CreateAppButton();
 		
 		System.out.println("- Header and Footer created");
 	}
@@ -110,12 +120,26 @@ public class HomeScreenGUI
 	
 	private void CreateWeather()
 	{
-		weather = new WeatherGatherer();
 		JLabel weatherLabel = new JLabel();
 		
 		properties.SetWeatherProperties(weatherLabel, windowWidth);
-		weather.StartWeather(weatherLabel, "31927");
+		//weather.StartWeather(weatherLabel, "31927");
 		
 		headerPanel.add(weatherLabel);
+	}
+
+	private void CreateAppButton()
+	{
+		try 
+		{
+			BufferedImage appPicture = ImageIO.read(new File("C:\\Users\\Cullen\\Documents\\GitHub\\MagicMirror\\AppIcon.png"));
+			JLabel appButton = new JLabel(new ImageIcon(appPicture));
+			footerPanel.add(appButton);
+		} 
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
