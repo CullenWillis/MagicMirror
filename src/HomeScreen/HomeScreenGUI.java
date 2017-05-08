@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -17,6 +19,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import HomeScreen.Logic.Apps.ButtonDetection;
+import HomeScreen.Logic.Apps.ButtonDetection_Interface;
 import HomeScreen.Logic.DateTime.ClockGatherer;
 import HomeScreen.Logic.DateTime.DateGatherer;
 import HomeScreen.Logic.DateTime.DateTime_Interface;
@@ -34,8 +38,10 @@ public class HomeScreenGUI
 	private HomeScreenProperties_Interface properties; // Interface for HomeScreen Properties
 	private DateTime_Interface dateTime; // Interface for Logic Settings class
 	private Weather_Interface weather; // Interface for Logic Settings class
+	private ButtonDetection_Interface buttonDectection;
 	
 	private int windowWidth; // width of the application's window;
+	private int windowHeight; // height of the application's window;
 	
 	private JFrame applicationWindow; // Application's window
 	private JPanel containerPanel; // Container
@@ -66,6 +72,7 @@ public class HomeScreenGUI
 		settings.SetWindowSettings(applicationWindow);
 		settings.SetHomeScreenLayout(applicationWindow, containerPanel);
 		windowWidth = applicationWindow.getWidth();
+		windowHeight = applicationWindow.getHeight();
 		
 		// Set the Header and Footer Settings
 		CreateContainers();
@@ -132,8 +139,15 @@ public class HomeScreenGUI
 	{
 		try 
 		{
+			buttonDectection = new ButtonDetection();
+			//Intialize Label
 			BufferedImage appPicture = ImageIO.read(new File("C:\\Users\\Cullen\\Documents\\GitHub\\MagicMirror\\AppIcon.png"));
 			JLabel appButton = new JLabel(new ImageIcon(appPicture));
+			
+			// Start Thead to detect Button Press
+			buttonDectection.Start(appButton);
+			
+			// Add button to footerPanel
 			footerPanel.add(appButton);
 		} 
 		catch (IOException e) 
@@ -142,4 +156,5 @@ public class HomeScreenGUI
 			e.printStackTrace();
 		}
 	}
+	
 }
